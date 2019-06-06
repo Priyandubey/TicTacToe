@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     // 0: yellow, 1: red, 2: empty
+    int enteries = 0;
 
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
 
         if (gameState[tappedCounter] == 2 && gameActive) {
+
+            enteries += 1;
 
             gameState[tappedCounter] = activePlayer;
 
@@ -84,10 +87,26 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
+
+            if(enteries == 9 && gameActive == true){
+
+                Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
+
+                TextView winnerTextView = (TextView) findViewById(R.id.winnerTextView);
+
+                winnerTextView.setText("Match has drawn");
+
+                playAgainButton.setVisibility(View.VISIBLE);
+
+                winnerTextView.setVisibility(View.VISIBLE);
+
+            }
         }
     }
 
     public void playAgain(View view) {
+
+        enteries = 0;
 
         Button playAgainButton = (Button) findViewById(R.id.playAgainButton);
 
